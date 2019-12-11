@@ -8,6 +8,7 @@ import os
 import aicrowd_helper
 import gym
 import minerl
+import argparse
 
 import math
 import random
@@ -22,13 +23,6 @@ from meta import Agent as metaagent
 from treechop import Agent as Agent1
 from craft import Agent as Agent2
 from stone import Agent as Agent3
-
-#import coloredlogs
-#coloredlogs.install(logging.DEBUG)
-
-# All the evaluations will be evaluated on MineRLObtainDiamond-v0 environment
-MINERL_GYM_ENV = os.getenv('MINERL_GYM_ENV', 'MineRLObtainDiamond-v0')
-MINERL_MAX_EVALUATION_EPISODES = int(os.getenv('MINERL_MAX_EVALUATION_EPISODES', 5))
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -78,13 +72,13 @@ class invent(object):
 
 
 
-def main():
+def main(episodes):
     """
     This function will be called for training phase.
     """
-    # Sample code for illustration, add your code below to run in test phase.
     # Load trained model from train/ directory
-    env = gym.make(MINERL_GYM_ENV)
+
+    env = gym.make('MineRLObtainDiamond-v0')
     meta = metaagent()
     agent1 = Agent1()  # treechop
     agent2 = Agent2()  # craft woodpkaxe
@@ -102,7 +96,7 @@ def main():
     step = 0
     all_frame = 0
 
-    for i_episode in range(MINERL_MAX_EVALUATION_EPISODES):
+    for i_episode in range(episodes):
         steptime = [0 for _ in range(8)]
         agent_reward = [0 for _ in range(8)]
         frame = 0
@@ -160,7 +154,15 @@ def main():
     env.close()
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='NeurIPS 2019 MineRL Competition Test')
 
-    main()
+    # hyper-parameter
+    parser.add_argument('--episodes', default=100, type=int, help='the number of episodes to test')
+
+    args = parser.parse_args()
+
+    main(args.episodes)
+
+
 
 

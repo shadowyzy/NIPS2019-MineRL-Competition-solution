@@ -287,19 +287,16 @@ def envstep(env, action_num):
             return obs, reward, done, info, i+1
     return obs, reward, done, info, 4
 
-def train():
+def train(episode):
 
     print('train treechop')
     env = gym.make('MineRLObtainDiamondDense-v0')
 
     agent1 = Agent()  # treechop
-    agent1.load_model('train/')
     agent1.updata_device()
 
-    sum_episodes = 3500
+    sum_episodes = episode
     all_frame = 0
-    #stop_frame = 3900000
-    #time_out = 100*60*60
     rew_all = []
     for i_episode in range(sum_episodes):
         env.seed(i_episode)
@@ -318,7 +315,7 @@ def train():
         else :
             time = 0
         loss, Q = agent1.train_data(time)
-        #agent1.updata_epsilon(_reward)
+        agent1.updata_epsilon(_reward)
         rew_all.append(_reward)
 
         print('epi %d all frame %d frame %5d Q %2.5f loss %2.5f reward %3d (%3.3f)'%\
@@ -329,8 +326,6 @@ def train():
         writer.add_scalar('validate/step', all_frame, i_episode)
         if i_episode > sum_episodes :
             break
-        #if all_frame > stop_frame or time_limit(time_out):
-        #    break
 
     # reset rpm
     agent1.memory.clear()

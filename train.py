@@ -8,7 +8,7 @@ import os
 import aicrowd_helper
 import gym
 import minerl
-from utility.parser import Parser
+import argparse
 
 import math
 import random
@@ -27,46 +27,8 @@ from stone import Agent as Agent3
 from rpm import rpm
 from treechop import train as treechop_train
 
-#import coloredlogs
-#coloredlogs.install(logging.DEBUG)
-
-# All the evaluations will be evaluated on MineRLObtainDiamond-v0 environment
-MINERL_GYM_ENV = os.getenv('MINERL_GYM_ENV', 'MineRLObtainDiamond-v0')
-# You need to ensure that your submission is trained in under MINERL_TRAINING_MAX_STEPS steps
-MINERL_TRAINING_MAX_STEPS = int(os.getenv('MINERL_TRAINING_MAX_STEPS', 8000000))
-# You need to ensure that your submission is trained by launching less than MINERL_TRAINING_MAX_INSTANCES instances
-MINERL_TRAINING_MAX_INSTANCES = int(os.getenv('MINERL_TRAINING_MAX_INSTANCES', 5))
-# You need to ensure that your submission is trained within allowed training time.
-# Round 1: Training timeout is 15 minutes
-# Round 2: Training timeout is 4 days
-MINERL_TRAINING_TIMEOUT = int(os.getenv('MINERL_TRAINING_TIMEOUT_MINUTES', 4*24*60))
-# The dataset is available in data/ directory from repository root.
-MINERL_DATA_ROOT = os.getenv('MINERL_DATA_ROOT', 'data/')
-
-# Optional: You can view best effort status of your instances with the help of parser.py
-# This will give you current state like number of steps completed, instances launched and so on. Make your you keep a tap on the numbers to avoid breaching any limits.
-
-parser = Parser('performance/',
-                allowed_environment=MINERL_GYM_ENV,
-                maximum_instances=MINERL_TRAINING_MAX_INSTANCES,
-                maximum_steps=MINERL_TRAINING_MAX_STEPS,
-                raise_on_error=False,
-                no_entry_poll_timeout=600,
-                submission_timeout=MINERL_TRAINING_TIMEOUT*60,
-                initial_poll_timeout=600)
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-start_time = time.time()
-writer = TensorBoard('../train_log/metabaseline_gam0.9_ipt_10_metamodelsmall_resnet')
-
-def time_limit(time_out):
-    global start_time
-    end_time = time.time()
-    #print(end_time-start_time)
-    if (end_time - start_time > time_out):
-        return True
-    else:
-        return False
+writer = TensorBoard('../train_log/metacontroller')
 
 class invent(object):
 
@@ -135,15 +97,14 @@ def np2torch(s):
     state = torch.from_numpy(s.copy())
     return state.to(dtype=torch.float, device=device)
 
-def main():
+def main(episode):
     """
     This function will be called for training phase.
     """
-    #treechop_train()
 
     #data = minerl.data.make(MINERL_GYM_ENV, data_dir=MINERL_DATA_ROOT)
 
-    env = gym.make(MINERL_GYM_ENV)
+    env = gym.make('MineRLObtainDiamond-v0')
 
     meta = metaagent()
     agent1 = Agent1()  # treechop
@@ -156,11 +117,9 @@ def main():
     agent1.load_model('train/')
 
     print("start train")
-    sum_episodes = 500
+    sum_episodes = episode
     step = 0
     all_frame = 0
-    stop_frame = 3900000
-    time_out = 94*60*60
 
     for i_episode in range(sum_episodes):
         steptime = [0 for _ in range(8)]
@@ -264,10 +223,6 @@ def main():
         print('craft Q %4.3f loss %4.3f epsilon %3.3f%%'%(wood_Q, wood_loss, agent2.epsilon*100))
         print('stone Q %4.3f loss %4.3f epsilon %3.3f%%'%(ston_Q, ston_loss, agent3.epsilon*100))
 
-        if all_frame > stop_frame or time_limit(time_out):
-            break
-    # Training 100% Completed
-    # aicrowd_helper.register_progress(1)
     env.close()
 
     meta.save_model('train/')
@@ -275,6 +230,17 @@ def main():
     agent3.save_model('train/')
 
 if __name__ == "__main__":
-    main()
+
+    parser = argparse.ArgumentParser(description='NeurIPS 2019 MineRL Competition Train')
+
+    # hyper-parameter
+
+    parser.add_argument('--treechop', default=300, type=int, help='the number of episodes to train treechop model')
+    parser.add_argument('--metacontroller', default=300, type=int, help='the number of episodes to train metacontroller and all subagents except treechop')
+
+    args = parser.parse_args()
+
+    treechop_train(args.treechop)
+    main(args.metacontroller)
 
 
