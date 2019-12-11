@@ -71,6 +71,11 @@ class invent(object):
         self.furnace1 = inv['furnace']
 
 
+def np2torch(s):
+    state = torch.from_numpy(s.copy())
+    return state.to(dtype=torch.float, device=device)
+
+
 
 def main(episodes):
     """
@@ -105,7 +110,7 @@ def main(episodes):
         obs = env.reset()
         done = False
 
-        m_obs = [obs['pov'] for _ in range(10)]
+        m_obs = [np2torch(obs['pov']) for _ in range(10)]
         m_inv = [obs['inventory'] for _ in range(10)]
         preinv = m_inv[-1]
         while not done:
