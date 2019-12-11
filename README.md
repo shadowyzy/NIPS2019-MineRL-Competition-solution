@@ -29,7 +29,7 @@ xvfb-run -s '-screen 0 1024x768x24' python3 test.py
 python3 test.py
 ```
 
-正常训练结束以后，测试的平均reward大概在$30-40$ 之间。
+正常训练结束以后，测试的平均reward大概在30-40之间。
 
 ### 相关链接
 

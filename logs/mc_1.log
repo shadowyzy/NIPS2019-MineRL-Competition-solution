@@ -134,3 +134,38 @@ Caused by: java.net.SocketTimeoutException: connect timed out
 [08:43:18] [Server thread/INFO]: Preparing spawn area: 85%
 [08:43:19] [Server thread/INFO]: Preparing spawn area: 99%
 [08:43:19] [Server thread/INFO]: Changing view distance to 4, from 10
+[08:45:29] [Server thread/INFO]: [STDOUT]: SERVER request state: WAITING_FOR_MOD_READY
+[08:45:29] [Server thread/INFO]: [STDOUT]: CLIENT request state: WAITING_FOR_SERVER_READY
+[08:45:29] [Server thread/INFO]: [STDOUT]: SERVER enter state: WAITING_FOR_MOD_READY
+[08:45:29] [Client thread/INFO]: [STDOUT]: CLIENT enter state: WAITING_FOR_SERVER_READY
+[08:45:29] [Netty Local Client IO #0/INFO]: [STDOUT]: Transformed Name: net.minecraft.client.entity.EntityOtherPlayerMP
+[08:45:29] [Netty Local Client IO #0/INFO]: [STDOUT]: MALMO: Attempting to transform MinecraftServer
+[08:45:29] [Netty Local Client IO #0/INFO]: [STDOUT]: MALMO: Found EntityOtherPlayerMP, attempting to transform it
+[08:45:29] [Server thread/INFO]: [STDOUT]: SERVER request state: DORMANT
+[08:45:29] [Server thread/INFO]: [STDOUT]: SERVER enter state: DORMANT
+[08:45:29] [Server thread/INFO]: [STDOUT]: INCOMING MISSION: Received MissionInit directly through ServerStateMachine constructor.
+[08:45:29] [Server thread/INFO]: [STDOUT]: Mission received: MineRLObtainDiamond-v0
+[08:45:29] [Server thread/INFO]: Received mission: §9MineRLObtainDiamond-v0
+[08:45:29] [Server thread/INFO]: Source: §alocalhost
+[08:45:29] [Server thread/INFO]: [STDOUT]: SERVER request state: BUILDING_WORLD
+[08:45:29] [Server thread/INFO]: [STDOUT]: SERVER enter state: BUILDING_WORLD
+[08:45:29] [Server thread/INFO]: [STDOUT]: SERVER request state: WAITING_FOR_AGENTS_TO_ASSEMBLE
+[08:45:29] [Server thread/INFO]: [STDOUT]: SERVER enter state: WAITING_FOR_AGENTS_TO_ASSEMBLE
+[08:45:29] [Server thread/INFO]: [STDOUT]: Experiment requires: 
+[08:45:29] [Server thread/INFO]: [STDOUT]: >>>> MalmoTutorialBot
+[08:45:29] [Netty Local Client IO #0/INFO]: Server protocol version 2
+[08:45:29] [Netty Server IO #1/INFO]: Client protocol version 2
+[08:45:29] [Netty Server IO #1/INFO]: Client attempting to join with 5 mods : minecraft@1.11.2,FML@8.0.99.99,malmomod@0.37.0,forge@13.20.0.2228,mcp@9.19
+[08:45:29] [Netty Local Client IO #0/INFO]: [Netty Local Client IO #0] Client side modded connection established
+[08:45:29] [Server thread/INFO]: [Server thread] Server side modded connection established
+[08:45:29] [Server thread/INFO]: MalmoTutorialBot[local:E:f4117c59] logged in with entity id 1969 at (14.5, 70.0, 243.5)
+[08:45:29] [Server thread/INFO]: MalmoTutorialBot joined the game
+[08:45:30] [Client thread/INFO]: [STDOUT]: ***Telling server we are ready - MalmoTutorialBot
+[08:45:32] [Client thread/INFO]: [STDOUT]: CLIENT request state: RUNNING
+[08:45:32] [Client thread/INFO]: [STDOUT]: CLIENT enter state: RUNNING
+[08:45:32] [Server thread/INFO]: [STDOUT]: SERVER request state: RUNNING
+[08:45:32] [Server thread/INFO]: [STDOUT]: SERVER enter state: RUNNING
+[08:45:32] [Client thread/INFO]: [STDOUT]: Resized the window
+[08:45:32] [Client thread/INFO]: [STDOUT]: Unpausing
+[08:45:32] [Client thread/INFO]: [CHAT] §l900...
+[08:45:33] [EnvServerSocketHandler/INFO]: Java has been asked to exit (code 0) by net.minecraftforge.fml.common.FMLCommonHandler.exitJava(FMLCommonHandler.java:659).
