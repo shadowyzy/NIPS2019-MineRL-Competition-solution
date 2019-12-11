@@ -31,6 +31,16 @@ python3 test.py
 
 正常训练结束以后，测试的平均reward大概在30-40之间。
 
+### 数据集
+
+oss地址
+
+```
+s3://ic-backup/yuziyi/minerl_data/
+```
+
+
+
 ### 相关链接
 
 - Docs: [http://www.minerl.io/docs/](http://www.minerl.io/docs/)

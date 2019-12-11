@@ -70,12 +70,9 @@ class invent(object):
         self.stpkaxe1 = inv['stone_pickaxe']
         self.furnace1 = inv['furnace']
 
-
 def np2torch(s):
     state = torch.from_numpy(s.copy())
     return state.to(dtype=torch.float, device=device)
-
-
 
 def main(episodes):
     """
