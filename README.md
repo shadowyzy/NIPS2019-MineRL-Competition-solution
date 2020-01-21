@@ -28,7 +28,7 @@ python3 train.py
 
 The model will be saved in this this folder `train/` when training complete. The training process takes **72h**(1x2080Ti + 4xCPU) .
 
-####testing
+## testing
 
 Run it just like training:
 
@@ -39,7 +39,7 @@ python3 test.py
 
 The average reward of test is **between 30 and 40** after normal training. 
 
-##Related Links
+## Related Links
 
 - Docs: [http://www.minerl.io/docs/](http://www.minerl.io/docs/)
 - Github: [https://github.com/minerllabs/minerl](https://github.com/minerllabs/minerl)
