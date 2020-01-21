@@ -1,51 +1,49 @@
-### 运行环境
+# NIPS 2019：MineRL Competition
+
+A pytorch solution for 4th place [NIPS 2019 MineRL Competition](https://www.aicrowd.com/challenges/neurips-2019-minerl-competition/leaderboards?challenge_round_id=126&post_challenge=on)
+
+## How to run it
+
+#### runtime environment
 
 ```
 pip install -r requirements.txt
 ```
 
-### 训练
+Once you install this requirements, you can run our code. **This solution did not use human datasets**.
 
-在没有显示器的服务器上运行命令
+#### training
+
+Run minerl environments **without a head(servers without monitors)** use a software renderer such as xvfb：
 
 ```
 xvfb-run -s '-screen 0 1024x768x24' python3 train.py 
 ```
 
-在有显示器的电脑上运行
+Run mineral environments **with a head(servers without monitors attached)**:
 
 ```
 python3 train.py 
 ```
 
-训练完了以后模型会保存在`train/` 文件夹下面，直接运行的训练时常大概是3天左右（72h）（硬件为1x 2080Ti + 4xCPU）。
+The model will be saved in this this folder `train/` when training complete. The training process takes **72h**(1x2080Ti + 4xCPU) .
 
-### 测试
+####testing
 
-与训练一样，没有显示器的话需要在前面加上一些命令：
+Run it just like training:
 
 ```
 xvfb-run -s '-screen 0 1024x768x24' python3 test.py
 python3 test.py
 ```
 
-正常训练结束以后，测试的平均reward大概在30-40之间。
+The average reward of test is **between 30 and 40** after normal training. 
 
-### 数据集
-
-oss地址
-
-```
-s3://ic-backup/yuziyi/minerl_data/
-```
-
-
-
-### 相关链接
+##Related Links
 
 - Docs: [http://www.minerl.io/docs/](http://www.minerl.io/docs/)
 - Github: [https://github.com/minerllabs/minerl](https://github.com/minerllabs/minerl)
 - AIcrowd: [https://www.aicrowd.com/challenges/neurips-2019-minerl-competition](https://www.aicrowd.com/challenges/neurips-2019-minerl-competition)
 - Competition Proposal: [https://arxiv.org/abs/1904.10079](https://arxiv.org/abs/1904.10079)
-- 数据集: https://router.sneakywines.me/minerl_v1/data_texture_0_low_res.tar.gz
-- 额外的数据集：https://router.sneakywines.me/minerl-v123321123321/data_texture_0_low_res.tar.gz
+- Human datasets: https://router.sneakywines.me/minerl_v1/data_texture_0_low_res.tar.gz
+- Extra human datasets：https://router.sneakywines.me/minerl-v123321123321/data_texture_0_low_res.tar.gz
